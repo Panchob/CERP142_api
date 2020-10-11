@@ -1,0 +1,5 @@
+UPDATE recommendations SET done = TRUE where number IN (1 ,2, 48);
+
+UPDATE recommendations SET unsure = TRUE where number IN (25, 32, 35, 37, 40, 41, 50, 53, 68, 136);
+
+UPDATE recommendations SET ongoing = TRUE where number IN ( 8, 9, 10, 11, 14, 16, 17, 19, 21, 22, 26, 32, 42, 43, 49, 51, 52, 55, 56, 61, 63, 65, 75, 76, 83, 84, 87, 88, 90, 94, 97, 99, 106, 113, 116, 120, 121, 130);
