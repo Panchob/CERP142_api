@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 PORT = int(os.environ.get('PORT', 5000))
 
@@ -10,6 +11,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_AS_ASCII'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
 CORS(app)
 
 
@@ -28,7 +31,6 @@ class Section(db.Model):
 
 class Recommendation(db.Model):
   __tablename__ = 'recommendations'
-  # TODO: change last 3 columns by one with status as a string.
   id = db.Column(db.Integer, primary_key=True)
   section_id = db.Column(db.Integer, db.ForeignKey('sections.id'))
   text = db.Column(db.String)
@@ -36,6 +38,7 @@ class Recommendation(db.Model):
   ongoing = db.Column(db.Boolean)
   unsure = db.Column(db.Boolean)
   done = db.Column(db.Boolean)
+  status = db.Column(db.String, default="notStarted")
 
   def format(self):
       return {
@@ -47,6 +50,7 @@ class Recommendation(db.Model):
           'unsure': self.unsure,
           'done': self.done
       }
+
 
 db.create_all()
 

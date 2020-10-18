@@ -1,13 +1,3 @@
-INSERT INTO public.sections(name) VALUES ('Gouvernement Québécois');
-INSERT INTO public.sections(name) VALUES ('Services de police');
-INSERT INTO public.sections(name) VALUES ('Services de justice');
-INSERT INTO public.sections(name) VALUES ('Services correctionnels');
-INSERT INTO public.sections(name) VALUES ('Services de santé et services sociaux');
-INSERT INTO public.sections(name) VALUES ('Services de protections de la jeunesse');
-INSERT INTO public.sections(name) VALUES ('Mécanisme de suivi');
-
-
-
 INSERT INTO public.recommendations (text, number, section_id, ongoing, unsure, done) VALUES ( 'Présenter des excuses publiques aux membres des Premières Nations et aux Inuit du Québec pour les préjudices causés par les lois, les politiques, les normes ou les pratiques des services publics à leur encontre.', 1, 1, false, false, false);
 INSERT INTO public.recommendations (text, number, section_id, ongoing, unsure, done) VALUES ( 'Procéder à l’adoption d’une motion de reconnaissance et de mise en œuvre de la Déclaration des Nations Unies sur les droits des peuples autochtones au Québec.', 2, 1, false, false, false);
 INSERT INTO public.recommendations (text, number, section_id, ongoing, unsure, done) VALUES ( 'Procéder, en collaboration avec les autorités autochtones, à l’élaboration et à l’adoption d’une loi garantissant la prise en compte des dispositions de la Déclaration des Nations Unies sur les droits des peuples autochtones dans le corpus législatif relevant de ses compétences.', 3, 1, false, false, false);

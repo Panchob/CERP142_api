@@ -1,0 +1,7 @@
+INSERT INTO public.sections(name) VALUES ('Gouvernement Québécois');
+INSERT INTO public.sections(name) VALUES ('Services de police');
+INSERT INTO public.sections(name) VALUES ('Services de justice');
+INSERT INTO public.sections(name) VALUES ('Services correctionnels');
+INSERT INTO public.sections(name) VALUES ('Services de santé et services sociaux');
+INSERT INTO public.sections(name) VALUES ('Services de protections de la jeunesse');
+INSERT INTO public.sections(name) VALUES ('Mécanisme de suivi');
