@@ -48,7 +48,8 @@ class Recommendation(db.Model):
           'number': self.number,
           'ongoing': self.ongoing,
           'unsure': self.unsure,
-          'done': self.done
+          'done': self.done,
+          'status': self.status
       }
 
 
@@ -67,7 +68,8 @@ def fetch_sections():
                 'done': r.done,
                 'ongoing': r.ongoing,
                 'unsure': r.unsure,
-                'text': r.text
+                'text': r.text,
+                'status': r.status
             }
             dic['recommendations'].append(reco)
 
