@@ -39,6 +39,7 @@ class Recommendation(db.Model):
   unsure = db.Column(db.Boolean)
   done = db.Column(db.Boolean)
   status = db.Column(db.String, default="notStarted")
+  link = db.Column(db.String)
 
   def format(self):
       return {
@@ -49,7 +50,8 @@ class Recommendation(db.Model):
           'ongoing': self.ongoing,
           'unsure': self.unsure,
           'done': self.done,
-          'status': self.status
+          'status': self.status,
+          'link' : self.link
       }
 
 
@@ -81,9 +83,10 @@ def fetch_sections():
         'sections': res
     })
 
-@app.route('/recommendations/done')
-def fetch_done():
-    selection = Recommendation.query.filter(Recommendation.done == True).all()
+
+@app.route('/recommendations/<status>')
+def fetch_ongoing(status):
+    selection = Recommendation.query.filter(Recommendation.status == status).all()
     recommendations = [recommendation.format() for recommendation in selection]
 
     return jsonify({
@@ -91,48 +94,19 @@ def fetch_done():
         'recommendations': recommendations
     })
 
-@app.route('/recommendations/ongoing')
-def fetch_ongoing():
-    selection = Recommendation.query.filter(Recommendation.ongoing == True).all()
-    recommendations = [recommendation.format() for recommendation in selection]
-
-    return jsonify({
-        'success': True,
-        'recommendations': recommendations
-    })
-
-@app.route('/recommendations/notStarted')
-def fetch_notStarted():
-    selection = Recommendation.query.filter(Recommendation.ongoing == False and Recommendation.done == False).all()
-    recommendations = [recommendation.format() for recommendation in selection]
-
-    return jsonify({
-        'success': True,
-        'recommendations': recommendations
-    })
 
 @app.route('/stats')
 def calculate_stats():
     recommendations = Recommendation.query.all()
 
     stats = {
-        'done': 0,
-        'ongoing': 0,
-        'unsure': 0,
-        'notStarted': len(recommendations)
+        'done': Recommendation.query.filter(Recommendation.status == "done").count(),
+        'ongoing': Recommendation.query.filter(Recommendation.status == "ongoing").count(),
+        'unsure': Recommendation.query.filter(Recommendation.status == "unsure").count(),
+        'notStarted': Recommendation.query.filter(Recommendation.status == "notStarted").count()
     }
 
-    for r in recommendations:
-        if r.done:
-            stats['done'] += 1
-        elif r.ongoing:
-            stats['ongoing'] += 1
-        elif r.unsure:
-            stats['unsure'] += 1
-    
-
-    total = stats['done'] + stats['ongoing'] + stats['unsure']
-    stats['notStarted'] -= total
+    print(stats)
 
     return jsonify({
         'success': True,
